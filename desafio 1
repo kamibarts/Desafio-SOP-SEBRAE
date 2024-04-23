@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Despesas</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Despesas</h1>
+    <form id="expense-form">
+        <label for="rent">Aluguel:</label>
+        <input type="number" id="rent" name="rent" required>
+        <label for="water">Água:</label>
+        <input type="number" id="water" name="water" required>
+        <label for="electricity">Energia Elétrica:</label>
+        <input type="number" id="electricity" name="electricity" required>
+        <label for="payroll">Folha de Pagamento:</label>
+        <input type="number" id="payroll" name="payroll" required>
+        <label for="taxes">Impostos:</label>
+        <input type="number" id="taxes" name="taxes" required>
+        <button type="submit">Calcular</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        document.getElementById('expense-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get input values
+            const rent = parseFloat(document.getElementById('rent').value);
+            const water = parseFloat(document.getElementById('water').value);
+            const electricity = parseFloat(document.getElementById('electricity').value);
+            const payroll = parseFloat(document.getElementById('payroll').value);
+            const taxes = parseFloat(document.getElementById('taxes').value);
+
+            // Calculate total and average expenses
+            const totalExpenses = rent + water + electricity + payroll + taxes;
+            const averageExpenses = totalExpenses / 5;
+
+            // Display results
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p>Total de Despesas: R$ ${totalExpenses.toFixed(2)}</p>
+                <p>Média de Despesas: R$ ${averageExpenses.toFixed(2)}</p>
+            `;
+
+            // Calculate annual estimate (assuming 12 months)
+            const annualEstimate = totalExpenses * 12;
+            resultDiv.innerHTML += `<p>Estimativa Anual de Despesas: R$ ${annualEstimate.toFixed(2)}</p>`;
+        });
+    </script>
+</body>
