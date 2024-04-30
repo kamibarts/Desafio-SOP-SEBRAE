@@ -1,0 +1,16 @@
+def calcular_parcela_e_montante(valor_financiado, taxa_juros_mensal, num_meses):
+    parcela = valor_financiado * (taxa_juros_mensal * (1 + taxa_juros_mensal) ** num_meses) / ((1 + taxa_juros_mensal) ** num_meses - 1)
+    montante_final = parcela * num_meses
+    return parcela, montante_final
+
+def main():
+    valor_financiado = float(input("Digite o valor a ser financiado: "))
+    taxa_juros_mensal = float(input("Digite a taxa de juros ao mês (em decimal): "))
+    num_meses = int(input("Digite o número de meses para pagar: "))
+
+    parcela, montante_final = calcular_parcela_e_montante(valor_financiado, taxa_juros_mensal, num_meses)
+    print(f"\nValor da parcela: R$ {parcela:.2f}")
+    print(f"Montante final a ser pago: R$ {montante_final:.2f}")
+
+if __name__ == "__main__":
+    main()
